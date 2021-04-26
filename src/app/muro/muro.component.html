@@ -1,0 +1,192 @@
+<div class="container-fluid">
+
+  <nav class="row navbar  sticky-top navbar-expand-md  navbar-dark bg-dark ">
+
+    <div class="col-md-2">
+      <a class="navbar-brand" [routerLink]="['/muro']" >SEMILLERO</a>
+    </div>
+    <div class="col-md-6">
+      <form class="d-flex">
+        <input class="form-control "  placeholder="Search" aria-label="Search" [value]="busqueda" (keyup)="eventoInputBusqueda($event)">
+        <button class="btn btn-outline-success" (click)="enviarBusqueda(true)"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="col-md-4 navbar-right" style="float: right!important;">
+      <div class="collapse navbar-collapse " id="navbarCollapse">
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/muro']"> <i class="fa fa-bars"></i>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/perfil']" [queryParams]="{id:usuario?.ID}"  > {{usuario.name}} <img src="{{usuario.avatar}}"
+                alt="" class="imgRedonda2"></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesion</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row contenedor-columnas">
+    <div class="col-3 columna-muro ">
+      
+      <div class="card ">
+        <div class="card-header">
+          <h6><b>Contacta Mas Personas...</b></h6>
+
+        </div>
+        <div class="card-body anyClass">
+
+          <div class="card-user" *ngFor="let u of listaUsuarios">
+            <div class="content">
+              <ul class="list-unstyled">
+                <li>
+                  <div class="row">
+                    <div class="col-3">
+                      <div>
+                        <img src="{{u.avatar}}" alt="" class="imgRedonda">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <a [routerLink]="['/perfil']" [queryParams]="{id:u.ID}"> <p class="card-text">{{u.name}}</p></a>
+                    </div>
+                    <div class="col-3 text-right">
+                      <button class="btn btn-sm btn-info btn-icon" (click)="addUsuario(u.ID)">
+                        <i class="fa fa-user-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     <app-buscar *ngIf="estado===true"[busqueda]="busqueda" [listaUsuarios]="listaUsuarios">
+
+     </app-buscar>
+
+    </div>
+    <div class="col-6 columna-muro">
+      <div class="card-pensando">
+        <div class="card-header col-12  ">
+          <img src="{{usuario.avatar}}"alt="" class="imgRedonda2">
+          <label > Que estas pensando {{usuario.name}} ?</label>
+          <div class="row">
+          <button type="button" class="btn btn-outline-secondary" (click)="abrirForm()">Vamos a Publicar!!</button>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="card" *ngFor="let i of listaPublicaciones">
+        <div class="card-header ">
+          <img src="{{i.user?.avatar}}" WIDTH=50 HEIGHT=50 BORDER=1 alt="">
+          <a [routerLink]="['/perfil']" [queryParams]="{id:i.user?.ID}">{{i.user?.name}}</a>
+          <h6>{{i.CreatedAt| date: "short"}}</h6>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{i.posted_text}}</p>
+          <ng-container *ngIf="i.image_url">
+            <img src="{{i.image_url}}" WIDTH=300 HEIGHT=300 BORDER=2 class="card-img-top" alt="...">
+          </ng-container>
+          <div class="row">
+            <hr>
+            <div class="col-11">
+              
+              <a  class="card-link">
+                <i *ngIf="!saberReaccion(i)" (click)="darlike(i.ID)" class="fas" >Me gusta</i> 
+                <i *ngIf="saberReaccion(i)"(click)="darlike(i.ID)" class="fas fa-thumbs-up"> <ng-container *ngIf="contarMegusta(i)">{{contMegusta}}</ng-container> </i> 
+                
+              </a>
+              <a [routerLink]="['/publicacion']" [queryParams]="{id:i.ID}" class="card-link" *ngIf="(i.comments ) && i.comments.length>0"><i class="fas fa-comment-alt"> Ver Comentarios</i></a>
+             
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Deja tu comentario aqui..." aria-label="Recipient's username" aria-describedby="button-addon2" [value]="comentario" (change)="eventoInput($event)">
+            <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="crearComentario(i.ID,usuario.ID)">Comentar</button>
+          </div>
+        </div>
+
+        <div class="card-footer text-muted" *ngIf="(i.comments ) && i.comments.length>0">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-1">
+                <img src="{{i.comments[0]?.User?.avatar}}" alt="" class="imgRedonda2">
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                   <a [routerLink]="['/perfil']" [queryParams]="{id:i.comments[0]?.User?.ID}"><b>{{i.comments[0]?.User?.name}}</b></a> 
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-12 col-sm-6">
+                  {{i.comments[0]?.comment}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-3 columna-muro">
+    <div class="card ">
+      <div class="card-header">
+        
+        <h6><b>Vinculate a un grupo o </b></h6>
+        <h6><b>Crea tu Grupo </b>
+          <button class="btn btn-sm btn-info btn-icon">
+            <i class="fa fa-plus" aria-hidden="true" (click)="abrirFormGrupo()"></i>
+          </button>        
+        </h6>        
+      </div>
+      
+      <div class="card-body anyClass">
+
+        <div class="card-user" *ngFor="let u of listaGrupos">
+          <div class="content">
+            <ul class="list-unstyled">
+              <li>
+                <div class="row">
+                  <div class="col-3">
+                    <div>
+                      <img src="{{u.imageUrl}}" alt="" class="imgRedonda">
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <a [routerLink]="['/grupos']" [queryParams]="{id:u.ID}"> <p class="card-text"  >{{u.name}}</p></a>
+                  </div>
+                  <div class="col-3 text-right">
+                    <button class="btn btn-sm btn-info btn-icon">
+                      <i class="fa fa-plus" aria-hidden="true" (click)="addGrupo(usuario?.ID,u?.ID)"></i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>

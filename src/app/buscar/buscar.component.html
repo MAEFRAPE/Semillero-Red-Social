@@ -1,0 +1,36 @@
+<div class="card ">
+    <div class="card-header">
+      <h6><b>Resultados de la Busqueda...</b></h6>
+
+    </div>
+    <div class="card-body anyClass">
+
+      <div class="card-user" *ngFor="let u of listaUsuariosAll">
+        <div class="content">
+          <ul class="list-unstyled">
+            <li>
+              <div class="row">
+                <div class="col-3">
+                  <div>
+                    <img src="{{u.avatar}}" alt="" class="imgRedonda">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <a [routerLink]="['/perfil']" [queryParams]="{id:u.ID}"> <p class="card-text">{{u.name}}</p></a>
+                </div>
+                <div class="col-3 text-right">
+                  <button class="btn btn-sm btn-info btn-icon" *ngIf="seguir(u)"(click)="addUsuario(u.ID)">
+                    <i class="fa fa-user-plus"></i>
+                  </button>
+                  <button class="btn  btn-sm btn-outline-secondary" *ngIf="!seguir(u)" disabled=true >
+                    amigo
+                  </button>
+
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

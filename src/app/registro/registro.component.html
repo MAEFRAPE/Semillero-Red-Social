@@ -1,0 +1,73 @@
+<div class="logo"><img src="../assets/logo.jpg"/></div>
+<div class="container">
+    <div class="row">
+      <h3 >Regitra tus datos</h3>
+     
+    </div>
+    <div class="row">
+      <form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="col-12">
+          <div class="form-group">
+            <label >Nombre</label>
+            <input type="text" 
+            class="form-control" 
+            formControlName="nombre" >
+            
+          </div>
+          
+        </div>
+        
+        <div class="col-12">
+          <div class="form-group">
+            <label >email</label>
+            <input type="email" 
+            class="form-control" 
+            formControlName="email">
+            <small
+                class="text-danger"
+                *ngIf="form.controls.email.status== 'INVALID'&& form.controls.email.touched"
+                
+                > Digite una direccion de correo Valida</small>
+          </div>
+        </div>
+        <div class="col-12">
+            <label class="col-form-label"> Contraseña</label>
+            <div class="form-row col" formGroupName="passwords"> 
+              <div class="col">
+                <input type="password"
+                class="form-control"
+                placeholder="contraseña"
+                formControlName="password"
+                [class.is-invalid]="miniCaracteres"
+                style="margin-bottom: 10px"
+                >
+                <small
+                class="text-danger"
+                *ngIf="miniCaracteres"
+                > Ldebe tener minimo 6 caracteres</small>
+                
+              </div>
+              <div class="col">
+                <input type="password"
+                class="form-control"
+                placeholder="contraseña"
+                formControlName="password2"
+                [class.is-invalid]="pass2Novalida"
+                >
+                <small
+                class="text-danger"
+                *ngIf="pass2Novalida"
+                > Las Contraseñas No coinciden</small>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit" >Crear usuario
+          </button>
+          
+          <button class="btn btn-danger" type="button" [routerLink]="['/login']">Salir</button> 
+        </div>
+      </form>
+    </div>
+  </div>

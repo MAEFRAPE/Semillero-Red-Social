@@ -1,0 +1,39 @@
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Crear Publicación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar()"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-6">
+                    <img src="{{usuario.avatar}}" alt="" class="imgRedonda2">
+                    <b>{{usuario.name}}</b>
+                  </div>
+              </div>
+              <form autocomplete="off" [formGroup]="form" (ngSubmit)="submit()"> 
+              <div class="row col-md-10 ">                                    
+                    <div class="mb-3">                      
+                      <textarea class="form-control" id="message-text" placeholder=" Escribe en tu publicación..." formControlName="comment"></textarea>
+                    </div>                  
+              </div>
+              <div class="row">
+                  <label class="col-md-10 ms-auto">
+                      <div class="col-12">
+                        Quieres Adjuntar una imagen a tu plicación?
+                        <input class="form-control form-control-sm" id="formFileSm" type="file"  accept=".jpg,.png" (click)="subir($event)" formControlName="image_url">
+                      </div>                      
+                  </label>
+              </div>
+            
+            <hr>
+            <div class="row ">
+              <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
+
+          </form>
+
+          
+          </div>
+          
+            
+       
+

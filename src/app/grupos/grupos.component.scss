@@ -1,0 +1,79 @@
+.contenedor-columnas {
+    height: 90%;
+    margin-top: 0%;
+  
+    .columna-muro {
+      background-color: rgb(255, 255, 255);
+      padding: 10px;
+  
+      
+    }
+}
+
+.card{
+  box-shadow: 3px 3px 5px 6px #bbb;
+  margin-bottom: 5px;
+  
+
+}
+
+.card-pensando{
+  box-shadow: 3px 3px 5px 6px #bbb;
+  margin-bottom: 5px;
+  height: 99px;
+  margin-bottom: 30px;
+  background-color: #212529!important ;
+  color: #bbb;
+}
+
+.navbar-brand{
+
+  font-style:berlin;
+
+  font-weight:bold;
+
+  font-size:2em;
+
+}
+.col{
+  padding: 2px;
+  margin-bottom: 2px;
+  
+}
+
+.imgRedonda {
+  width:50px;
+  height:50px;
+  border-radius:160px;
+  border:2px solid #666;
+}
+.imgRedonda2 {
+  width:40px;
+  height:40px;
+  border-radius:160px;
+  border:2px solid #666;
+}
+.anyClass {
+  height:300px;
+  overflow-y: scroll;
+}
+
+.imgRedonda3 {
+    width:200px;
+    height:200px;
+    border-radius:160px;
+    border:2px solid #666;
+    display:block;
+    margin:auto;
+    
+    
+  }
+
+  .card2{
+    box-shadow: 3px 3px 5px 6px #bbb;
+    margin-bottom: 5px;
+    background-color: #212529!important ;
+    height: 300px;
+    color: #bbb;
+    
+  }

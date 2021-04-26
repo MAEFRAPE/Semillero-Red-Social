@@ -1,0 +1,138 @@
+<div class="container-fluid">
+
+
+    <nav class="row navbar  sticky-top navbar-expand-md  navbar-dark bg-dark ">
+  
+      <div class="col-md-2">
+        <a class="navbar-brand" [routerLink]="['/muro']" >SEMILLERO</a>
+      </div>
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-4 navbar-right" style="float: right!important;">
+        <div class="collapse navbar-collapse " id="navbarCollapse">
+  
+  
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" [routerLink]="['/muro']"> <i class="fa fa-bars"></i>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" [routerLink]="['/perfil']" [queryParams]="{id:usuario?.ID}"  > {{usuario.name}} <img src="{{usuario.avatar}}"
+                  alt="" class="imgRedonda2"></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-user"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesion</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+  
+    <div class="row contenedor-columnas">
+      
+      <div class="col-8 columna-muro">
+          
+        <div class="card2 " >
+            <h3>GRUPOS</h3>
+            <img src="{{grupoConsulta?.imageUrl}}" alt="" class="imgRedonda3">
+            <div class="nombre">
+              <h3>{{grupoConsulta?.name}}</h3>
+              
+            </div>        
+          </div>
+        <div class="card" >
+          <div class="card-header ">
+            <h6> <b>Descripción Del Grupo: </b> {{grupoConsulta?.description}}</h6>
+          </div>
+          <div class="card-body">
+            <div class="card-body anyClass">
+
+                <div class="card-user" *ngFor="let u of listaMiembros">
+                  <div class="content">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="row">
+                          <div class="col-3">
+                            <div>
+                              <img src="{{u.avatar}}" alt="" class="imgRedonda">
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <a [routerLink]="['/perfil']" [queryParams]="{id:u.ID}"> <p class="card-text">{{u.name}}</p></a>
+                          </div>
+                          <div class="col-3 text-right">
+                            <button class="btn btn-sm btn-info btn-icon" *ngIf="seguir(u)"(click)="addUsuario(u.ID)">
+                              <i class="fa fa-user-plus"></i>
+                            </button>
+                            <button class="btn  btn-sm btn-outline-secondary" *ngIf="!seguir(u)" disabled=true >
+                              amigo
+                            </button>
+          
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+  
+      </div>
+      <div class="col-4 columna-muro">
+        <div class="card ">
+            <div class="card-header">
+              
+              <h6><b>Vinculate a un grupo o </b></h6>
+              <h6><b>Crea tu Grupo </b>
+                <button class="btn btn-sm btn-info btn-icon">
+                  <i class="fa fa-plus" aria-hidden="true" (click)="abrirFormGrupo()"></i>
+                </button>        
+              </h6>        
+            </div>
+            
+            <div class="card-body anyClass">
+      
+              <div class="card-user" *ngFor="let u of listaGrupos">
+                <div class="content">
+                  <ul class="list-unstyled">
+                    <li>
+                      <div class="row">
+                        <div class="col-3">
+                          <div>
+                            <img src="{{u.imageUrl}}" alt="" class="imgRedonda">
+                          </div>
+                        </div>
+                        <div class="col-6">
+                            <a [routerLink]="['/grupos']" [queryParams]="{id:u.ID}"> <p class="card-text"  >{{u.name}}</p></a>
+                        </div>
+                        <div class="col-3 text-right">
+                          <button class="btn btn-sm btn-info btn-icon">
+                            <i class="fa fa-plus" aria-hidden="true" (click)="addGrupo(usuario?.ID,u?.ID)"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>    
+      </div>
+    </div>
+  
+    
+  
+  
+  </div>
+  
+  

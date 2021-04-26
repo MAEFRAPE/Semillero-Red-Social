@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Crear Grupo</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar()"></button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-md-6">
+            <img src="{{usuario.avatar}}" alt="" class="imgRedonda2">
+            <b>{{usuario.name}}</b>
+          </div>
+      </div>
+      <form autocomplete="off" [formGroup]="form" (ngSubmit)="submit()"> 
+      <div class="row col-md-10 ">                                    
+            <div class="mb-3"> 
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder=" Dale nombre a tu grupo..." formControlName="name" >
+            </div>                  
+      </div>
+      <div class="row col-md-10 ">                                    
+        <div class="mb-3">  
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder=" Describe a tu grupo..." formControlName="description" >
+        </div>                  
+    </div>
+    
+    <hr>
+    <div class="row ">
+      <button type="submit" class="btn btn-primary">Crear Grupo</button>
+    </div>
+
+   
+  </form>
+
+  
+  </div>
