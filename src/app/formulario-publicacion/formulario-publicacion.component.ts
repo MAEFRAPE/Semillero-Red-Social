@@ -71,7 +71,7 @@ export class FormularioPublicacionComponent implements OnInit {
           this.publicacion= new Publicacion(values.comment,id,this.usuario,this.imag) 
           this.servicioPublicacion.crearPublicacion(this.publicacion)
          this.activemodal.dismiss();
-        }, 3500);
+        }, 3000);
 
         
       }

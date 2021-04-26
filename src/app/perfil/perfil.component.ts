@@ -68,7 +68,7 @@ export class PerfilComponent implements OnInit {
     this.servicioPosts.ObtenerSubcripcion().subscribe(elem =>{
       
       
-      this.serviciNotifi.notificar(this.listaPublicaciones,elem,this.listaUsuarios,this.usuario,this.listaGrupos,this.listaUsuarioSer)
+      this.serviciNotifi.notificar(this.listaPublicacionesId,elem,this.listaUsuarios,this.usuario,this.listaGrupos,this.listaUsuarioSer)
 
 
         
