@@ -167,9 +167,9 @@ export class MuroComponent implements OnInit {
   }
 
   saberReaccion(obj:Publicacion){
-     return obj.reactions?.some(reac=>{
+     return obj.reactions?.some(reaci=>{
       const id= this.usuario.ID
-      return reac.user_id=== id
+      return reaci.user_id=== id
     })
   }
 
